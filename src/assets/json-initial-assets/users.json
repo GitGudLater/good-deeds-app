@@ -1,0 +1,30 @@
+[
+    {
+        "id":"wasdcsdvsdvs",
+        "login": "johnyd45234",
+        "password": "1212124124",
+        "name": "John D",
+        "isDeleted": false
+    },
+    {
+        "id":"fbedfhberth",
+        "login": "hrr54564",
+        "password": "1212124124",
+        "name": "John B",
+        "isDeleted": false
+    },
+    {
+        "id":"nyfklyj,ghj,y",
+        "login": "nhrrtt343",
+        "password": "1212124124",
+        "name": "John S",
+        "isDeleted": false
+    },
+    {
+        "id":"bfjndfbsdfvbesv",
+        "login": "ger345345",
+        "password": "1212124124",
+        "name": "John F",
+        "isDeleted": false
+    }
+]
