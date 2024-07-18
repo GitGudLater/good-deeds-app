@@ -1,5 +1,5 @@
 export interface IJwtState {
-    //jwt: string | null;
+    jwt: string | null;
     login: string;
-    password: string;
+    loadingStatus: string;
 }

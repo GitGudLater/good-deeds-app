@@ -1,53 +1,31 @@
-"use client";
+import { useState } from "react";
+import { Pin } from "../../../components/pin";
+import { dal } from "@/dal/dal";
+import { UserDTO } from "@/models/interfaces/user.dto";
 
-import { useEffect, useState } from "react";
-import { Friend } from "./components/friend";
-import { Pin } from "./components/pin";
-import { IPinCardProps } from "@/models/interfaces/pin.props";
-import { IFriendCardProps } from "@/models/interfaces/friend.props";
-import pinsDefault from "../../../assets/json-initial-assets/pins.json";
-import usersDefault from "../../../assets/json-initial-assets/users.json";
+export default async function User({ params }: { params: { login: string } }) {
+    const {login} = params;
 
-
-export default function User({ params }: { params: { login: string } }) {
-    /*const [userPins, setUserPins] = useState<IPinCardProps[]>(pinsDefault);
-    const [userFriends, setUserFriends] = useState<IFriendCardProps[]>(usersDefault);
-
-    useEffect(() => {
-      setUserPins();
-      setUserFriends();
-    },[])*/
+    const [user, pins] = await Promise.all([dal.fetchUserByLogin(login), dal.fetchPins(login)])
 
     return (
       <section>
         <div>
-          My login: {params.login}
+          user login: {user.login}
         </div>
         <div>
-          My password: 
+          user name: {user.name}
         </div>
         <div>
           <div>
             <h3>
-              My friends: 
+              deeds: 
             </h3>
             <ul>
               {
-                usersDefault.map((friend) => 
-                  <Friend key={friend.id} login={friend.login} />
-                )
-              }
-            </ul>
-          </div>
-          <div>
-            <h3>
-              My deeds: 
-            </h3>
-            <ul>
-              {
-                pinsDefault.map(pin => 
+                pins ? pins.map(pin => 
                   <Pin key={pin.id} {...pin} />
-                )
+                ) : null
               }
             </ul>
           </div>

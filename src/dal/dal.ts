@@ -22,19 +22,16 @@ const fetchUserByLogin = async (login: string):Promise<UserDTO> => {
         return response.json();
 }
 
-const fetchUsers = async (login: string):Promise<UserDTO[]> => {
+const fetchUsers = async ():Promise<UserDTO[]> => {
     //some action
-    const response = await fetch(serverUrl + `/user/${login}`,{
+    const response = await fetch(serverUrl + `/user`,{
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             /*'Authorization': `Bearer ${token}`,*/
         }
     });
-    if(!response.ok) 
-        throw new Error('Failed to fetch data');
-    else
-        return response.json();
+    return response.json();
 }
 
 const fetchProfile = async (token: string):Promise<ProfileDTO> => {
@@ -46,10 +43,8 @@ const fetchProfile = async (token: string):Promise<ProfileDTO> => {
             'Authorization': `Bearer ${token}`,
         }
     });
-    if(!response.ok) 
-        throw new Error('Failed to fetch data');
-    else
-        return response.json();
+
+    return response.json();
 }
 
 const loginUser = async (login: string, password: string): Promise<IBearerJwtResponse> => {
