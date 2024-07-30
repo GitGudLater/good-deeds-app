@@ -1,7 +1,9 @@
 import { IBearerJwtResponse } from "@/models/interfaces/bearer-jwt.dto";
 import { CreateUserDTO } from "@/models/interfaces/create-user.dto";
+import { NewPinDTO } from "@/models/interfaces/new-pin.dto";
 import { PinDTO } from "@/models/interfaces/pin.dto";
 import { ProfileDTO } from "@/models/interfaces/profile.dto";
+import { UpdateUserDTO } from "@/models/interfaces/update-user.dto";
 import { UserDTO } from "@/models/interfaces/user.dto";
 import { json } from "stream/consumers";
 
@@ -48,19 +50,19 @@ const fetchProfile = async (token: string):Promise<ProfileDTO> => {
 }
 
 const loginUser = async (login: string, password: string): Promise<IBearerJwtResponse> => {
-    const response = await fetch(serverUrl + `/login`, {
+    const response = await fetch(serverUrl + `/auth/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             /*'Authorization': `Bearer ${token}`,*/
         },
-        body: JSON.stringify({login: login, password: password})
+        body: JSON.stringify({username: login, password: password})
     });
     return response.json();
 }
 
-const addUser = async (newUser: CreateUserDTO): Promise<string> => {
-    const response = await fetch(serverUrl + `/login`, {
+const addUser = async (newUser: CreateUserDTO): Promise<UserDTO | null> => {
+    const response = await fetch(serverUrl + `/user`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -93,13 +95,14 @@ const fetchPins = async (login: string): Promise<PinDTO[]> => {
 }
 
 
-const addPin = async (login: string, token: string, pin: PinDTO) => {
+const addPin = async (login: string, token: string, pin: NewPinDTO) => {
     fetch(serverUrl + `/pin/${login}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
-        }
+        },
+        body: JSON.stringify({newPin:pin})
     });
 }
 
@@ -124,7 +127,19 @@ const updatePinStatus = async (pinId: string, pinStatus: boolean, token: string)
     });
 }
 
+const updateUser = async (updatedUserInfo: UpdateUserDTO, token: string) => {
+    fetch(serverUrl + `/user/${updatedUserInfo.login}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({updatedUser:updatedUserInfo})
+    });
+}
+
 export const dal = {
+    updateUser,
     fetchUserByLogin,
     updatePinStatus,
     deletePin,

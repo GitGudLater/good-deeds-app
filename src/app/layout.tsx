@@ -18,14 +18,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body /* className={inter.className}*/>
+      <body className="min-h-[100vh] w-screen">
 
 
-        <nav>
-          <Link href="/"  >Main</Link>
-          <Link href="/users"  >Users</Link>
-          <Link href="/log-in"  >Login</Link>
-          <Link href="/create-user"  >Create user</Link>
+        <nav className="flex flex-row h-[fill-content] gap-[30px] bg-[#1064e5]">
+          <Link className="py-[10px] px-[10px] text-[white] text-[20px]" href="/"  >Main</Link>
+          <Link className="py-[10px] px-[10px] text-[white] text-[20px]" href="/users"  >Users</Link>
+          <Link className="py-[10px] px-[10px] text-[white] text-[20px]" href="/log-in"  >Login</Link>
+          <Link className="py-[10px] px-[10px] text-[white] text-[20px]" href="/create-user"  >Create user</Link>
+          <Link className="py-[10px] px-[10px] text-[white] text-[20px]" href="/users/my-page"  >My profile</Link>
+
         </nav>
 
         <StoreProvider>{children}</StoreProvider>

@@ -9,19 +9,19 @@ export default async function User({ params }: { params: { login: string } }) {
     const [user, pins] = await Promise.all([dal.fetchUserByLogin(login), dal.fetchPins(login)])
 
     return (
-      <section>
-        <div>
+      <section className="p-[50px] flex flex-col gap-[40px]">
+        <div className="text-[25px]">
           user login: {user.login}
         </div>
-        <div>
+        <div className="text-[25px]">
           user name: {user.name}
         </div>
         <div>
           <div>
-            <h3>
+            <h3 className="text-[25px]">
               deeds: 
             </h3>
-            <ul>
+            <ul className="flex flex-col gap-[20px]">
               {
                 pins ? pins.map(pin => 
                   <Pin key={pin.id} {...pin} />
