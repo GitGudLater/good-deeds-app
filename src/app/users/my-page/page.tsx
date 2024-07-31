@@ -77,7 +77,7 @@ export default function CurrentAuthentikatedUser() {
           method:"GET"
         })
         .then(response => response.json())
-        //.then(data => {setFriends(data); setFetchPinsStatus(false)});
+        .then(data => {setFriends(data); setFetchFriendsStatus(false)});
       }
     },[login,fetchFriendsStatus])
 

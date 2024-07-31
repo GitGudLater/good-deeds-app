@@ -18,7 +18,7 @@ export  const Friend: FC<IFriendCardProps> = (params) =>  {
     }
     return(
         <div className={`flex flex-row gap-[40px] p-[20px] transition-all linear rounded-md shadow-[0_2px_6px_1px_rgba(0,0,0,0.04)] bg-[#fafafa] text-center hover:shadow-[0_2px_6px_1px_rgba(0,0,0,0.06)] hover:text-[white] hover:bg-[#1064e5]`}>
-            <Link className="" href={`/users/${login}`}>
+            <Link className="grow text-left" href={`/users/${login}`}>
                 {login}
             </Link>
             <button className="px-[10px] py-[2px] rounded-[50%] font-[600] hover:shadow-[0_2px_6px_1px_rgba(0,0,0,0.03)] hover:bg-[red] hover:text-[white] transition-all linear" onClick={() => deletePin()}>X</button>
