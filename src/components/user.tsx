@@ -1,10 +1,11 @@
 'use client'
 import { IFriendCardProps } from "@/models/interfaces/friend.props"
+import { IUserCardProps } from "@/models/interfaces/user-card.props";
 import { jwtSelectors } from "@/store/jwt/jwt.selectors";
 import { FC } from "react"
 import { useSelector } from "react-redux";
 
-export const User: FC<IFriendCardProps> = (params) =>  {
+export const User: FC<IUserCardProps> = (params) =>  {
     const {login} = params;
 
     return (

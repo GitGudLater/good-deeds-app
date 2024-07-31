@@ -1,4 +1,4 @@
 export interface IFriendCardProps {
     login: string;
-    handler?: any;
+    handler: any;
 }

@@ -156,13 +156,13 @@ export default function CurrentAuthentikatedUser() {
               friends:
             </h3>
             <form onSubmit={(event) => addFriend(event)} className="py-[10px] flex flex-row">
-              <input  required minLength={10} className="mx-[5px] p-[5px] grow rounded-md shadow-[0_2px_6px_1px_rgba(0,0,0,0.04)]" placeholder="Friends login" value={searchedFriendslogin} onChange={(event => setSearchedFriendsLogin(event.target.value))}/>
+              <input  required minLength={1} className="mx-[5px] p-[5px] grow rounded-md shadow-[0_2px_6px_1px_rgba(0,0,0,0.04)]" placeholder="Friends login" value={searchedFriendslogin} onChange={(event => setSearchedFriendsLogin(event.target.value))}/>
               <input type="submit" className="cursor-pointer px-[55px] py-[5px] rounded-md bg-[#ebebeb] text-[16px] font-[600] hover:shadow-[0_2px_6px_1px_rgba(0,0,0,0.03)] hover:bg-[#1064e5] hover:text-[white] transition-all linear" value={'Add Possible Friend'} />
             </form>
             <ul className="flex flex-col gap-[10px]">
                 {
                   friends ? friends.map(friend => 
-                    <Friend key={friend.id} handler={setFetchFriendsStatus} login={login}/>
+                    <Friend key={friend.id} handler={setFetchFriendsStatus} login={friend.login}/>
                   ) : null
                 }
               </ul>
