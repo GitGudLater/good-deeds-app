@@ -11,7 +11,7 @@ const serverUrl = process.env.SRVR_URL;
 
 const fetchUserByLogin = async (login: string):Promise<UserDTO> => {
     //some action
-    const response = await fetch(serverUrl + `/user/${login}`,{
+    const response = await fetch(serverUrl + `/user/profile/${login}`,{
         cache: 'no-cache',
         method: 'GET',
         headers: {
@@ -27,7 +27,7 @@ const fetchUserByLogin = async (login: string):Promise<UserDTO> => {
 
 const fetchUsers = async ():Promise<UserDTO[]> => {
     //some action
-    const response = await fetch(serverUrl + `/user`,{
+    const response = await fetch(serverUrl + `/user/profile/`,{
         cache: 'no-cache',
         method: 'GET',
         headers: {
@@ -65,7 +65,7 @@ const loginUser = async (login: string, password: string): Promise<IBearerJwtRes
 }
 
 const addUser = async (newUser: CreateUserDTO): Promise<UserDTO | null> => {
-    const response = await fetch(serverUrl + `/user`, {
+    const response = await fetch(serverUrl + `/user/profile`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ const addUser = async (newUser: CreateUserDTO): Promise<UserDTO | null> => {
 }
 
 const deleteUser = async (login: string, token: string) => {
-    fetch(serverUrl + `/${login}`, {
+    fetch(serverUrl + `/profile/${login}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ const updatePinStatus = async (pinId: string, pinStatus: boolean, token: string)
 }
 
 const updateUser = async (updatedUserInfo: UpdateUserDTO, token: string) => {
-    fetch(serverUrl + `/user/${updatedUserInfo.login}`, {
+    fetch(serverUrl + `/user/profile/${updatedUserInfo.login}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -142,7 +142,44 @@ const updateUser = async (updatedUserInfo: UpdateUserDTO, token: string) => {
     });
 }
 
+const addFriendToUser = async (userLogin:string, friendsLogin: string, token: string) => {
+    fetch(serverUrl + `/user/friend`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({logins:{userLogin, friendsLogin}})
+    });
+}
+
+const removeFriendFromUser = async (userLogin:string, friendsLogin: string, token: string) => {
+    fetch(serverUrl + `/user/friend`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({logins:{userLogin, friendsLogin}})
+    });
+}
+
+const fetchUserFriends = async (userLogin:string,token: string): Promise<UserDTO[]> => {
+    console.log(`dal - ${userLogin}`);
+    const response = await fetch(serverUrl + `/user/friend/${userLogin}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+    });
+    return response.json();
+}
+
 export const dal = {
+    fetchUserFriends,
+    addFriendToUser,
+    removeFriendFromUser,
     updateUser,
     fetchUserByLogin,
     updatePinStatus,
