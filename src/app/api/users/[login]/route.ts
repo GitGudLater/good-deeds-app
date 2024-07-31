@@ -9,9 +9,7 @@ export async function GET(request: Request,{ params }: { params: { login: string
 
 export async function PUT(request: Request) {
   const res: UpdateUserDTO = await request.json();
-  console.log(res);
   const cookie = cookies().get("token");
-  console.log(cookie);
   cookie ? await dal.updateUser(res, cookie.value) : null; 
   return Response.json({reload: true});
 }

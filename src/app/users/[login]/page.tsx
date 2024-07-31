@@ -5,8 +5,9 @@ import { UserDTO } from "@/models/interfaces/user.dto";
 
 export default async function User({ params }: { params: { login: string } }) {
     const {login} = params;
-
-    const [user, pins] = await Promise.all([dal.fetchUserByLogin(login), dal.fetchPins(login)])
+    const user = await dal.fetchUserByLogin(login);
+    const pins = await dal.fetchPins(login);
+    //const [user, pins] = await Promise.all([dal.fetchUserByLogin(login), dal.fetchPins(login)])
 
     return (
       <section className="p-[50px] flex flex-col gap-[40px]">

@@ -12,6 +12,7 @@ const serverUrl = process.env.SRVR_URL;
 const fetchUserByLogin = async (login: string):Promise<UserDTO> => {
     //some action
     const response = await fetch(serverUrl + `/user/${login}`,{
+        cache: 'no-cache',
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -27,6 +28,7 @@ const fetchUserByLogin = async (login: string):Promise<UserDTO> => {
 const fetchUsers = async ():Promise<UserDTO[]> => {
     //some action
     const response = await fetch(serverUrl + `/user`,{
+        cache: 'no-cache',
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -39,6 +41,7 @@ const fetchUsers = async ():Promise<UserDTO[]> => {
 const fetchProfile = async (token: string):Promise<ProfileDTO> => {
     //some action
     const response = await fetch(serverUrl + `/auth/profile`,{
+        cache: 'no-cache',
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -85,6 +88,7 @@ const deleteUser = async (login: string, token: string) => {
 
 const fetchPins = async (login: string): Promise<PinDTO[]> => {
     const response = await fetch(serverUrl + `/pin/${login}`, {
+        cache: 'no-cache',
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -134,7 +138,7 @@ const updateUser = async (updatedUserInfo: UpdateUserDTO, token: string) => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({updatedUser:updatedUserInfo})
+        body: JSON.stringify(updatedUserInfo)
     });
 }
 

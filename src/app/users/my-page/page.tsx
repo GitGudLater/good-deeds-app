@@ -10,6 +10,7 @@ import { PinDTO } from "@/models/interfaces/pin.dto";
 import { jwtActions } from "@/store/jwt/jwt.slice";
 import { NewPinDTO } from "@/models/interfaces/new-pin.dto";
 import { UpdateUserDTO } from "@/models/interfaces/update-user.dto";
+import { MyPagePin } from "@/components/my-page-pin";
 
 export default function CurrentAuthentikatedUser() {
 
@@ -116,7 +117,7 @@ export default function CurrentAuthentikatedUser() {
               <ul className="flex flex-col gap-[10px]">
                 {
                   pins ? pins.map(pin => 
-                    <Pin key={pin.id} {...pin} />
+                    <MyPagePin key={pin.id} {...pin} handler={setFetchPinsStatus} login={login}/>
                   ) : null
                 }
               </ul>
